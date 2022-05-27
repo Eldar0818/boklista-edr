@@ -1,24 +1,25 @@
-import logo from './logo.svg';
+import { useState } from 'react'
 import './App.css';
+import BookList from './components/BookList';
+import Navbar from './components/Navbar';
+import books from './data'
 
 function App() {
+
+  const [searchValue, setSearchValue] = useState('')
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <main className="App">
+      <Navbar/>
+      <BookList
+        books={books.filter(book=> book.title.toLowerCase().includes(searchValue) || book.author.toLowerCase().includes(searchValue) )}
+        searchValue={searchValue} 
+        setSearchValue={setSearchValue}
+      />
+      <footer>
+        <p>Yalikun Yilida May 26 2022 &copy;</p>
+      </footer>
+    </main>
   );
 }
 
